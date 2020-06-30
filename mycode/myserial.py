@@ -61,7 +61,9 @@ class Myserial(serial.Serial):
 
                 if self.textbox:
                     self.textbox.moveCursor(QTextCursor.End)
-                    self.textbox.insertPlainText(self.newline)
+                    self.textbox.insertPlainText(self.newline)          #串口内容写入textbox
+
+
                 self.newline = ""
 
                 if __name__ == "__main__":                                   #测试，打印
@@ -75,13 +77,24 @@ class Myserial(serial.Serial):
         self.read_enable = 1                                       #使能flag
         self.thread.start()                                        #开启线程
     #=============================================
+
+    def stop_loop(self):
+        self.read_enable = 0
+        self.thread.join()
+    #=============================================
         
 
     def close(self):     #停止读取串口、结束读取进程、关闭串口
-        self.read_enable = 0
-        self.thread.join()
+        try:
+            self.stop_loop()
+        except:
+            pass
         serial.Serial.close(self)
     #=================================
+
+    def clear(self):
+        pass
+    #================================
 #==============================================
 
 

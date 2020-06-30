@@ -6,21 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>451</width>
-    <height>645</height>
+    <width>1250</width>
+    <height>785</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QGroupBox" name="groupBox">
+   <widget class="QGroupBox" name="groupBox_graph">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>200</y>
-      <width>361</width>
-      <height>321</height>
+      <x>360</x>
+      <y>50</y>
+      <width>791</width>
+      <height>531</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -38,334 +38,931 @@
      <string>Graph</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QTabWidget" name="tabWid">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>361</width>
-      <height>194</height>
+      <x>50</x>
+      <y>60</y>
+      <width>291</width>
+      <height>521</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0">
-        <widget class="QComboBox" name="port_select">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>16</pointsize>
-          </font>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1" rowspan="2">
-        <widget class="QPushButton" name="open_serial">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>56</width>
-           <height>56</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>100</width>
-           <height>201</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>16</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>打开
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;s&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab_Serial">
+     <attribute name="title">
+      <string>串口</string>
+     </attribute>
+     <widget class="QComboBox" name="baund_rate">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>180</width>
+        <height>35</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+      <item>
+       <property name="text">
+        <string>1382400</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>115200</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>38400</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>19200</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>9600</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QPushButton" name="open_serial">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>10</y>
+        <width>75</width>
+        <height>75</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>56</width>
+        <height>56</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>201</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>打开
 串口</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QComboBox" name="baund_rate">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>16</pointsize>
-          </font>
-         </property>
-         <item>
-          <property name="text">
-           <string>1382400</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>115200</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>38400</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>19200</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>9600</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="2" column="0" colspan="2">
-        <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="0">
-          <widget class="QComboBox" name="forward_vol">
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-            </font>
-           </property>
-           <item>
-            <property name="text">
-             <string>12V</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>11V</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>10V</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>9V</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>8V</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>7V</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>6V</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>5V</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>4V</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>3V</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QComboBox" name="backward_vol">
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-            </font>
-           </property>
-           <item>
-            <property name="text">
-             <string>12V</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>11V</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>10V</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>9V</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>8V</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>7V</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>6V</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>5V</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>4V</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>3V</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QPushButton" name="motor_forward">
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>正转</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QPushButton" name="motor_backward">
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>反转</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>正转时间</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QLabel" name="label_2">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>反转时间</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLineEdit" name="forward_time">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="backward_time">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-            </font>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="QTextBrowser" name="textBrowser">
+      </property>
+     </widget>
+     <widget class="QComboBox" name="port_select">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>180</width>
+        <height>35</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_RecText">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>130</y>
+        <width>261</width>
+        <height>331</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_SentText">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>90</y>
+        <width>261</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_Ctrl">
+     <attribute name="title">
+      <string>控制</string>
+     </attribute>
+     <widget class="QLineEdit" name="lineEdit_F_SetPoint">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>90</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_Temperature">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>190</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Temperature</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_Force">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>90</y>
+        <width>61</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Force</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_T_SetPoint">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>190</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_Mode">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>71</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Mode</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_Position">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>140</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Position</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_P_SetPoint">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>140</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="mode_select">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <item>
+       <property name="text">
+        <string>等温</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>等张</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>恒定位置</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_SamplePeriod">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>30</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_Speriod">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>10</y>
+        <width>141</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Sample Period</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="StartSample">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>240</y>
+        <width>120</width>
+        <height>56</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>56</width>
+        <height>56</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>120</width>
+        <height>201</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>28</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Start</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="CtrlStart">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>240</y>
+        <width>120</width>
+        <height>56</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>56</width>
+        <height>56</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>120</width>
+        <height>201</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>28</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Ctrl</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Clear">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>310</y>
+        <width>120</width>
+        <height>56</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>56</width>
+        <height>56</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>120</width>
+        <height>201</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>28</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Send">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>310</y>
+        <width>120</width>
+        <height>56</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>56</width>
+        <height>56</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>120</width>
+        <height>201</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>28</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Send</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Save">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>380</y>
+        <width>261</width>
+        <height>56</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>56</width>
+        <height>56</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>300</width>
+        <height>201</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>28</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Save</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_para">
+     <attribute name="title">
+      <string>参数</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox_Tpid">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>10</y>
+        <width>231</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>Temperature PID</string>
+      </property>
+      <widget class="QLineEdit" name="lineEdit_T_Kp">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>30</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
        <property name="font">
         <font>
-         <pointsize>16</pointsize>
+         <pointsize>22</pointsize>
         </font>
        </property>
+       <property name="text">
+        <string/>
+       </property>
       </widget>
-     </item>
-    </layout>
+      <widget class="QLineEdit" name="lineEdit_T_Ti">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>70</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>22</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_T_Ti">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>70</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Ti</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_T_Td">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>110</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>22</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_T_Td">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>110</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Td</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_T_Kp">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Kp</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_F_PID">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>170</y>
+        <width>231</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>Force PID</string>
+      </property>
+      <widget class="QLineEdit" name="lineEdit_F_Kp">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>30</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>22</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_F_Ti">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>70</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>22</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_F_Ti">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>70</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Ti</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_F_Td">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>110</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>22</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_F_Td">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>110</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Td</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_F_Kp">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Kp</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_P_PID">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>330</y>
+        <width>231</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>Position PID</string>
+      </property>
+      <widget class="QLineEdit" name="lineEdit_P_Kp">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>30</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>22</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_P_Ti">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>70</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>22</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_P_Ti">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>70</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Ti</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_P_Td">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>110</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>22</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_P_Td">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>110</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Td</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_P_Kp">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Kp</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -373,7 +970,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>451</width>
+     <width>1250</width>
      <height>18</height>
     </rect>
    </property>
