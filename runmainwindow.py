@@ -10,7 +10,7 @@ from mycode.myserial import *
 import threading
 
 
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMenu, QWidget, QAction, QGridLayout
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMenu, QWidget, QAction, QGridLayout, QFileDialog
 from PyQt5 import QtCore,  QtGui
 import pyqtgraph as pg
 
@@ -44,7 +44,7 @@ class Binding(QWidget):
         self.ui.motor_forward.released.connect(self.motor_stop)
 
         #反转按钮
-        self.ui.motor_backward.pressed.connect(self.motor_move)
+        self.ui.motor_backward.pressed.connect(self.openFile)
         self.ui.motor_backward.released.connect(self.motor_stop)
 
         #定时器
@@ -146,6 +146,26 @@ class Binding(QWidget):
             self.ui.forward_time.setText("%.1fs"%(0.1*self.count))
         elif self.ui.motor_backward.isDown():
             self.ui.backward_time.setText("%.1fs" % (0.1 * self.count))
+
+    def openFile(self):
+        # get_directory_path = QFileDialog.getExistingDirectory(self,
+        #                                                       "选取指定文件夹",
+        #                                                       "C:/")
+        # self.filePathlineEdit.setText(str(get_directory_path))
+
+        get_filename_path, ok = QFileDialog.getOpenFileName(self,
+                                                            "选取单个文件",
+                                                            "C:/",
+                                                            "All Files (*);;Text Files (*.txt)")
+        if ok:
+            self.filePathlineEdit.setText(str(get_filename_path))
+
+        get_filenames_path, ok = QFileDialog.getOpenFileNames(self,
+                                                              "选取多个文件",
+                                                              "C:/",
+                                                              "All Files (*);;Text Files (*.txt)")
+        if ok:
+            self.filePathlineEdit.setText(str(' '.join(get_filenames_path)))
 
 
 if __name__ == "__main__":
