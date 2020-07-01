@@ -4,29 +4,39 @@
 # File name：myQtGraph.py
 
 import pyqtgraph as pg
-import sys
-from PyQt5.QtWidgets import QGridLayout, QWidget, QApplication
 from queue import Queue
-import threading
+from PyQt5.QtWidgets import QGridLayout, QWidget, QApplication
 from PyQt5 import QtCore
-import time
+from PyQt5 import QtGui
+
 
 class MyQtGraph():
 
     def __init__(self, queue, mode):
         self.grid = QGridLayout()
+        self.grid.setSpacing(0)
+
+        # pg.setConfigOption('background', 'w')
+        # pg.setConfigOption('foreground', 'k')
+
 
         self.temperaturePlot = pg.PlotWidget(title="Temperature")
         self.forcePlot = pg.PlotWidget(title="Force")
         self.positionPlot = pg.PlotWidget(title="Position")
         self.versus = pg.PlotWidget(title="Versus")
 
+        font = QtGui.QFont()
+        font.setPixelSize(20)
+
+
         listtemp = [self.temperaturePlot, self.forcePlot, self.positionPlot]
         for each in listtemp:
-            each.showGrid(x=True, y=True)
+            each.showGrid(x=True, y=True, alpha=0.5)
             each.setLabel('bottom', "Time", units='s')
+            each.getAxis("bottom").tickFont = font
         del(listtemp)
         self.temp_curve_1 = self.temperaturePlot.plot()
+        self.temp_curve_1.setPen((200,200,100))
         self.force_curve_1 = self.forcePlot.plot()
         self.pos_curve_1 = self.positionPlot.plot()
         self.versue_curve_1 = self.versus.plot()
@@ -48,7 +58,7 @@ class MyQtGraph():
         self.grid.addWidget(self.versus, 1, 1)
 
         self.time = QtCore.QTimer()
-        self.time.setInterval(100)
+        self.time.setInterval(50)
         self.time.timeout.connect(self.update)
 
     def decode(self):
@@ -63,13 +73,19 @@ class MyQtGraph():
         self.half_line = new_text.split("\r\n")[-1]
 
 
-        for each in lines:
-
-            data = each.split(",")  # 每行文本用逗号分割
-            self.time_list.append(float(data[0]))
-            self.temperature_list.append(float(data[1]))
-            self.force_list.append(float(data[2]))
-            self.position_list.append(float(data[3]))
+        for each_line in lines:
+            data = each_line.split(",")  # 每行文本用逗号分割
+            for each in data:
+                try:
+                    float(each)
+                except:
+                    break
+            else:
+                self.time_list.append(float(data[0]))
+                self.temperature_list.append(float(data[1]))
+                self.force_list.append(float(data[2]))
+                self.position_list.append(float(data[3]))
+            continue
     # ===================================
 
     def update(self):
@@ -95,10 +111,14 @@ class MyQtGraph():
     def clear(self):
         for each in self.data:
             each = []
+        self.update()
     #=========================
 #=======================
 
 if __name__ == "__main__":
+    import time
+    import threading
+    import sys
 
     QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     queue1 = Queue()

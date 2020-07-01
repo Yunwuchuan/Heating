@@ -44,7 +44,6 @@ class Myserial(serial.Serial):
         super(Myserial,self).__init__(*args, **kwargs)
         self.read_enable = 0
         self.history = ""
-        self.newline = ""
         self.thread = threading.Thread(target = self.read_loop)    #为循环读取创建线程
         self.thread.setDaemon(True)
     #==================================================
@@ -54,17 +53,15 @@ class Myserial(serial.Serial):
             
             if self.in_waiting:
                 self.newcontent = self.read(self.in_waiting).decode("gbk")  #读取新内容
-                self.newline +=self.newcontent
 
-                self.history += self.newline                             #将新内容加入历史内容
-                self.queue.put(self.newline)                             #新内容加入队列
+                self.history += self.newcontent                           #将新内容加入历史内容
+                self.queue.put(self.newcontent)                             #新内容加入队列
 
                 if self.textbox:
                     self.textbox.moveCursor(QTextCursor.End)
-                    self.textbox.insertPlainText(self.newline)          #串口内容写入textbox
+                    self.textbox.insertPlainText(self.newcontent)          #串口内容写入textbox
 
 
-                self.newline = ""
 
                 if __name__ == "__main__":                                   #测试，打印
                     print(self.newcontent)
@@ -74,13 +71,17 @@ class Myserial(serial.Serial):
 
 
     def start_loop(self):   #开始读取
+        if self.in_waiting:
+            self.read(self.in_waiting)  # 开始读取之前把串口积攒的数据读掉
         self.read_enable = 1                                       #使能flag
-        self.thread.start()                                        #开启线程
+        self.thread = threading.Thread(target=self.read_loop)  # 为循环读取创建线程
+        self.thread.setDaemon(True)
+        self.thread.start()  # 开启线程
     #=============================================
 
     def stop_loop(self):
         self.read_enable = 0
-        self.thread.join()
+        self.thread.join()  # 合并线程
     #=============================================
         
 
@@ -93,7 +94,8 @@ class Myserial(serial.Serial):
     #=================================
 
     def clear(self):
-        pass
+        self.history = ""
+        self.newcontent = ""
     #================================
 #==============================================
 
