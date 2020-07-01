@@ -61,6 +61,40 @@ class MyQtGraph():
         self.time.setInterval(50)
         self.time.timeout.connect(self.update)
 
+        self.templabel = pg.TextItem()
+        # self.temperaturePlot.addItem(self.templabel)
+        self.tempvLine = pg.InfiniteLine(angle=90, movable=False, )  # 创建一个垂直线条
+        self.temphLine = pg.InfiniteLine(angle=0, movable=False, )  # 创建一个水平线条
+
+        self.temperaturePlot.addItem(self.tempvLine, ignoreBounds=True)  # 在图形部件中添加垂直线条
+        self.temperaturePlot.addItem(self.temphLine, ignoreBounds=True)  # 在图形部件中添加水平线条
+
+        self.move_slot = pg.SignalProxy(self.temperaturePlot.scene().sigMouseMoved, rateLimit=60, slot=self.mouse_move)
+
+    def mouse_move(self,event = None):
+        if event is None:
+            print("事件为空")
+        else:
+            pos = event[0]  # 获取事件的鼠标位置
+            try:
+                # 如果鼠标位置在绘图部件中
+                if self.temperaturePlot.sceneBoundingRect().contains(pos):
+                    mousePoint = self.temperaturePlot.plotItem.vb.mapSceneToView(pos)  # 转换鼠标坐标
+                    index = int(mousePoint.x())  # 鼠标所处的X轴坐标
+                    pos_y = int(mousePoint.y())  # 鼠标所处的Y轴坐标
+                    if min(self.temperature_list) < index < max(self.temperature_list):
+                        # 在label中写入HTML
+                        self.templabel.setHtml(
+                            "<p style='color:white'><strong>时间：{0}</strong></p><p style='color:white'>温度：{1}</p><p".format(
+                                index, self.temperature_list[self.time_list.index(index)],))
+                        self.templabel.setPos(mousePoint.x(), mousePoint.y())  # 设置label的位置
+                    # 设置垂直线条和水平线条的位置组成十字光标
+                    self.tempvLine.setPos(mousePoint.x())
+                    self.temphLine.setPos(mousePoint.y())
+            except Exception as e:
+                pass
+                #print(traceback.print_exc())
+
     def decode(self):
         new_text = ""
         full_line = ""
@@ -89,14 +123,17 @@ class MyQtGraph():
     # ===================================
 
     def update(self):
-        print("****")
-        print(self.time_list)
-        print("***")
+
         self.decode()
         self.temp_curve_1.setData(self.time_list,self.temperature_list)
         self.force_curve_1.setData(self.time_list,self.force_list)
         self.pos_curve_1.setData(self.time_list,self.position_list)
-        self.versue_curve_1.setData(self.temperature_list,self.position_list)
+        if self.mode == '0':
+            self.versue_curve_1.setData(self.force_list,self.position_list)
+        elif self.mode == '1':
+            self.versue_curve_1.setData(self.temperature_list, self.position_list)
+        elif self.mode == '2':
+            self.versue_curve_1.setData(self.temperature_list,self.force_list)
     #=========================
 
 
@@ -143,12 +180,6 @@ if __name__ == "__main__":
 
     thread1 = threading.Thread(target = gen)
     thread1.start()
-
-
-
-
-
-
 
 
     sys.exit(app.exec_())
