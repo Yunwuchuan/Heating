@@ -79,7 +79,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>22</pointsize>
+        <family>Arial</family>
+        <pointsize>16</pointsize>
        </font>
       </property>
       <item>
@@ -162,7 +163,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>22</pointsize>
+        <family>Arial</family>
+        <pointsize>16</pointsize>
        </font>
       </property>
      </widget>
@@ -177,6 +179,7 @@
       </property>
       <property name="font">
        <font>
+        <family>Arial</family>
         <pointsize>16</pointsize>
        </font>
       </property>
@@ -192,6 +195,7 @@
       </property>
       <property name="font">
        <font>
+        <family>Arial</family>
         <pointsize>16</pointsize>
        </font>
       </property>
@@ -212,7 +216,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>22</pointsize>
+        <family>Arial</family>
+        <pointsize>16</pointsize>
        </font>
       </property>
       <property name="text">
@@ -230,7 +235,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>22</pointsize>
+        <family>Arial</family>
+        <pointsize>16</pointsize>
        </font>
       </property>
       <property name="text">
@@ -248,7 +254,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>22</pointsize>
+        <family>Arial</family>
+        <pointsize>16</pointsize>
        </font>
       </property>
       <property name="text">
@@ -266,7 +273,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>22</pointsize>
+        <family>Arial</family>
+        <pointsize>16</pointsize>
        </font>
       </property>
       <property name="text">
@@ -284,7 +292,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>22</pointsize>
+        <family>Arial</family>
+        <pointsize>16</pointsize>
        </font>
       </property>
       <property name="text">
@@ -302,7 +311,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>22</pointsize>
+        <family>Arial</family>
+        <pointsize>16</pointsize>
        </font>
       </property>
       <property name="text">
@@ -320,7 +330,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>22</pointsize>
+        <family>Arial</family>
+        <pointsize>16</pointsize>
        </font>
       </property>
       <property name="text">
@@ -374,7 +385,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>22</pointsize>
+        <family>Arial</family>
+        <pointsize>16</pointsize>
        </font>
       </property>
       <property name="text">
@@ -392,7 +404,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>22</pointsize>
+        <family>Arial</family>
+        <pointsize>16</pointsize>
        </font>
       </property>
       <property name="text">
@@ -428,7 +441,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>28</pointsize>
+        <family>Arial</family>
+        <pointsize>22</pointsize>
        </font>
       </property>
       <property name="text">
@@ -464,7 +478,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>28</pointsize>
+        <family>Arial</family>
+        <pointsize>22</pointsize>
        </font>
       </property>
       <property name="text">
@@ -500,7 +515,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>28</pointsize>
+        <family>Arial</family>
+        <pointsize>22</pointsize>
        </font>
       </property>
       <property name="text">
@@ -536,7 +552,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>28</pointsize>
+        <family>Arial</family>
+        <pointsize>22</pointsize>
        </font>
       </property>
       <property name="text">
@@ -572,7 +589,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>28</pointsize>
+        <family>Arial</family>
+        <pointsize>22</pointsize>
        </font>
       </property>
       <property name="text">
@@ -590,7 +608,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>22</pointsize>
+        <family>微软雅黑</family>
+        <pointsize>16</pointsize>
        </font>
       </property>
       <property name="text">
@@ -608,7 +627,8 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>22</pointsize>
+        <family>Arial</family>
+        <pointsize>16</pointsize>
        </font>
       </property>
       <property name="text">
@@ -1007,7 +1027,7 @@
      <x>0</x>
      <y>0</y>
      <width>1500</width>
-     <height>18</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>

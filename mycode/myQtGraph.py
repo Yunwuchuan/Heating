@@ -62,7 +62,7 @@ class MyQtGraph():
         self.time.timeout.connect(self.update)
 
         self.templabel = pg.TextItem()
-        # self.temperaturePlot.addItem(self.templabel)
+        self.temperaturePlot.addItem(self.templabel,ignoreBounds=True)
         self.tempvLine = pg.InfiniteLine(angle=90, movable=False, )  # 创建一个垂直线条
         self.temphLine = pg.InfiniteLine(angle=0, movable=False, )  # 创建一个水平线条
 

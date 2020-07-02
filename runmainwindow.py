@@ -116,7 +116,7 @@ class Binding(QWidget):
 
             self.ui.open_serial.setChecked(False)
             gl.mainserial = Myserial(self.ui.port_select.currentText().split(" ")[0], \
-                                         int(self.ui.baund_rate.currentText()), timeout=None, textbox=self.ui.textBrowser_RecText, queue=gl.queue1)
+                                         int(self.ui.baund_rate.currentText()), timeout=None, textbox=self.ui.textBrowser_RecText, queue=gl.queue1, rtscts=True,dsrdtr=True)
 
             try:
                 self.port_state = gl.mainserial.is_open
