@@ -80,15 +80,24 @@ class MyQtGraph():
                 # 如果鼠标位置在绘图部件中
                 if self.temperaturePlot.sceneBoundingRect().contains(pos):
                     mousePoint = self.temperaturePlot.plotItem.vb.mapSceneToView(pos)  # 转换鼠标坐标
-                    index = int(mousePoint.x())  # 鼠标所处的X轴坐标
+                    try:
+                        index = int(mousePoint.x())  # 鼠标所处的X轴坐标
+                    except:
+                        index = 0
                     pos_y = int(mousePoint.y())  # 鼠标所处的Y轴坐标
-                    if min(self.temperature_list) < index < max(self.temperature_list):
+                    # if min(self.temperature_list) < index < max(self.temperature_list):
                         # 在label中写入HTML
-                        self.templabel.setHtml(
-                            "<p style='color:white'><strong>时间：{0}</strong></p><p style='color:white'>温度：{1}</p><p".format(
-                                index, self.temperature_list[self.time_list.index(index)],))
-                        self.templabel.setPos(mousePoint.x(), mousePoint.y())  # 设置label的位置
+                        # self.templabel.setHtml(
+                        #     "<p style='color:white'><strong>时间：{0}</strong></p><p style='color:white'>温度：{1}</p><p".format(
+                        #         index, self.temperature_list[self.time_list.index(index)]))
+
+                        # 在label中写入HTML
+                    self.templabel.setHtml(
+                        "<p style='color:white'><strong>时间：{0}</strong></p><p style='color:white'>温度：{1}</p><p".format(
+                            1,2))
+
                     # 设置垂直线条和水平线条的位置组成十字光标
+                    self.templabel.setPos(mousePoint.x(), mousePoint.y())  # 设置label的位置
                     self.tempvLine.setPos(mousePoint.x())
                     self.temphLine.setPos(mousePoint.y())
             except Exception as e:
