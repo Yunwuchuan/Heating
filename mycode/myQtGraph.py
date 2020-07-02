@@ -97,7 +97,6 @@ class MyQtGraph():
 
     def decode(self):
         new_text = ""
-        full_line = ""
         while not (self.queue.empty()):
             new_text += self.queue.get()  # queue中的新文本读进来
         new_text = self.half_line + new_text  # 跟之前剩下的半行合并
@@ -125,15 +124,18 @@ class MyQtGraph():
     def update(self):
 
         self.decode()
-        self.temp_curve_1.setData(self.time_list,self.temperature_list)
-        self.force_curve_1.setData(self.time_list,self.force_list)
-        self.pos_curve_1.setData(self.time_list,self.position_list)
-        if self.mode == '0':
-            self.versue_curve_1.setData(self.force_list,self.position_list)
-        elif self.mode == '1':
-            self.versue_curve_1.setData(self.temperature_list, self.position_list)
-        elif self.mode == '2':
-            self.versue_curve_1.setData(self.temperature_list,self.force_list)
+        try:
+            self.temp_curve_1.setData(self.time_list,self.temperature_list)
+            self.force_curve_1.setData(self.time_list,self.force_list)
+            self.pos_curve_1.setData(self.time_list,self.position_list)
+            if self.mode == '0':
+                self.versue_curve_1.setData(self.force_list,self.position_list)
+            elif self.mode == '1':
+                self.versue_curve_1.setData(self.temperature_list, self.position_list)
+            elif self.mode == '2':
+                self.versue_curve_1.setData(self.temperature_list,self.force_list)
+        except:
+            pass
     #=========================
 
 
@@ -147,7 +149,7 @@ class MyQtGraph():
 
     def clear(self):
         for each in self.data:
-            each = []
+            each.clear()
         self.update()
     #=========================
 #=======================

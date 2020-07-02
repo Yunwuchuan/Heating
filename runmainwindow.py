@@ -43,7 +43,7 @@ class Binding(QWidget):
         #---------
 
         #初始化绘图
-        self.graph = MyQtGraph(gl.queue1,1)
+        self.graph = MyQtGraph(gl.queue1,'1')
         self.ui.groupBox_graph.setLayout(self.graph.grid)
 
         #初始设成第一个选项卡
