@@ -142,6 +142,7 @@ class Binding(QWidget):
     def start_clicked(self):
         if self.ui.startSample.isChecked():
             print("采样键按下")
+            self.graph.clear()
             self.graph.start_plot()
             self.ui.startSample.setText("Stop")
         else:
