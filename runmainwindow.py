@@ -79,6 +79,10 @@ class Binding(QWidget):
         self.ui.lineEdit_P_Td.setText("0")
         self.ui.lineEdit_Scan_Period.setText("0")
 
+        self.textTime = QtCore.QTimer()
+        self.textTime.setInterval(500)
+        self.textTime.timeout.connect(self.update_panel)
+
     def changeMode(self, index):
         if index == 0:
             self.ui.lineEdit_F_SetPoint.setEnabled(True)
@@ -116,7 +120,7 @@ class Binding(QWidget):
 
             self.ui.open_serial.setChecked(False)
             gl.mainserial = Myserial(self.ui.port_select.currentText().split(" ")[0], \
-                                         int(self.ui.baund_rate.currentText()), timeout=None, textbox=self.ui.textBrowser_RecText, queue=gl.queue1, rtscts=True,dsrdtr=True)
+                                         int(self.ui.baund_rate.currentText()), timeout=None, textbox=gl.textQueue, queue=gl.queue1, rtscts=True,dsrdtr=True)
 
             try:
                 self.port_state = gl.mainserial.is_open
@@ -126,10 +130,12 @@ class Binding(QWidget):
                 self.ui.open_serial.setText("关闭\n串口")
                 self.ui.open_serial.setChecked(True)
                 gl.mainserial.start_loop()
+                self.textTime.start()
 
         else:
             self.ui.open_serial.setChecked(True)
             gl.mainserial.close()
+            self.textTime.stop()
             try:
                 self.port_state = gl.mainserial.is_open
             except:
@@ -142,7 +148,6 @@ class Binding(QWidget):
     def start_clicked(self):
         if self.ui.startSample.isChecked():
             print("采样键按下")
-            self.graph.clear()
             self.graph.start_plot()
             self.ui.startSample.setText("Stop")
         else:
@@ -225,7 +230,14 @@ class Binding(QWidget):
         saveFile()
 
     def update_panel(self):
-        pass
+        new_text = ""
+        while not (gl.textQueue.empty()):
+            new_text += gl.textQueue.get()  # queue中的新文本读进来
+
+        self.ui.textBrowser_RecText.moveCursor(QTextCursor.End)
+        self.ui.textBrowser_RecText.insertPlainText(new_text)
+
+
 
 
     #

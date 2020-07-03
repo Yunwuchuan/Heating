@@ -82,7 +82,7 @@ class MyQtGraph():
                     mousePoint = self.temperaturePlot.plotItem.vb.mapSceneToView(pos)  # 转换鼠标坐标
 
                     index = bisect.bisect(self.time_list,mousePoint.x())  # 鼠标所处的X轴坐标
-                    print(index)
+                    #print(index)
 
                     pos_y = int(mousePoint.y())  # 鼠标所处的Y轴坐标
                     if 0 < index < max(self.time_list):
@@ -95,7 +95,7 @@ class MyQtGraph():
                 self.tempvLine.setPos(mousePoint.x())
                 self.temphLine.setPos(mousePoint.y())
             except Exception as e:
-                print(e)
+                #print(e)
                 pass
                 #print(traceback.print_exc())
 
@@ -118,10 +118,15 @@ class MyQtGraph():
                 except:
                     break
             else:
-                self.time_list.append(float(data[0]))
-                self.temperature_list.append(float(data[1]))
-                self.force_list.append(float(data[2]))
-                self.position_list.append(float(data[3]))
+                try:
+                    self.time_list.append(float(data[0]))
+                    self.temperature_list.append(float(data[1]))
+                    self.force_list.append(float(data[2]))
+                    self.position_list.append(float(data[3]))
+                    #print(len(self.time_list),len(self.temperature_list),len(self.force_list),len(self.position_list))
+                except:
+                    self.clear()
+                    print("cleared when decode")
             continue
     # ===================================
 
@@ -138,13 +143,17 @@ class MyQtGraph():
                 self.versue_curve_1.setData(self.temperature_list, self.position_list)
             elif self.mode == 0:
                 self.versue_curve_1.setData(self.temperature_list,self.force_list)
-        except:
-            pass
+        except Exception as e:
+            self.clear()
+            print("cleared when update")
+            print(e)
+
     #=========================
 
 
 
     def start_plot(self):
+        self.clear()
         self.time.start()
     #=================
     def stop_plot(self):
@@ -154,6 +163,7 @@ class MyQtGraph():
     def clear(self):
         for each in self.data:
             each.clear()
+        self.half_line = ""
         self.update()
     #=========================
 #=======================

@@ -58,8 +58,7 @@ class Myserial(serial.Serial):
                 self.queue.put(self.newcontent)                             #新内容加入队列
 
                 if self.textbox:
-                    self.textbox.moveCursor(QTextCursor.End)
-                    self.textbox.insertPlainText(self.newcontent)          #串口内容写入textbox
+                    self.textbox.put(self.newcontent)
 
 
 
