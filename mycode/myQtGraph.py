@@ -59,7 +59,7 @@ class MyQtGraph():
         self.grid.addWidget(self.versus, 1, 1)
 
         self.time = QtCore.QTimer()
-        self.time.setInterval(50)
+        self.time.setInterval(50)  #16ms 60fps
         self.time.timeout.connect(self.update)
 
         self.templabel = pg.TextItem()
@@ -123,6 +123,7 @@ class MyQtGraph():
                     self.temperature_list.append(float(data[1]))
                     self.force_list.append(float(data[2]))
                     self.position_list.append(float(data[3]))
+                    #print(data[0])
                     #print(len(self.time_list),len(self.temperature_list),len(self.force_list),len(self.position_list))
                 except:
                     self.clear()
@@ -163,7 +164,7 @@ class MyQtGraph():
     def clear(self):
         for each in self.data:
             each.clear()
-        self.half_line = ""
+        #self.half_line = ""
         self.update()
     #=========================
 #=======================
