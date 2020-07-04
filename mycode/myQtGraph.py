@@ -139,9 +139,9 @@ class MyQtGraph():
             self.pos_curve_1.setData(self.time_list,self.position_list)
             if self.mode == 0:
                 self.versue_curve_1.setData(self.force_list,self.position_list)
-            elif self.mode == 0:
+            elif self.mode == 1:
                 self.versue_curve_1.setData(self.temperature_list, self.position_list)
-            elif self.mode == 0:
+            elif self.mode == 2:
                 self.versue_curve_1.setData(self.temperature_list,self.force_list)
         except Exception as e:
             self.clear()

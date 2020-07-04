@@ -43,7 +43,7 @@ class Binding(QWidget):
         #---------
 
         #初始化绘图
-        self.graph = MyQtGraph(gl.queue1,'1')
+        self.graph = MyQtGraph(gl.queue1,0)
         self.ui.groupBox_graph.setLayout(self.graph.grid)
 
         #初始设成第一个选项卡
@@ -96,6 +96,7 @@ class Binding(QWidget):
             self.ui.lineEdit_F_SetPoint.setEnabled(False)
             self.ui.lineEdit_P_SetPoint.setEnabled(True)
             self.ui.lineEdit_T_SetPoint.setEnabled(True)
+        self.graph.mode = index
 
     def re_serial_port(self, index):
 
@@ -120,7 +121,7 @@ class Binding(QWidget):
 
             self.ui.open_serial.setChecked(False)
             gl.mainserial = Myserial(self.ui.port_select.currentText().split(" ")[0], \
-                                         int(self.ui.baund_rate.currentText()), timeout=None, textbox=gl.textQueue, queue=gl.queue1, rtscts=True,dsrdtr=True)
+                                         int(self.ui.baund_rate.currentText()), timeout=None, textbox=gl.textQueue, queue=gl.queue1, timeinterval=0.05, rtscts=True,dsrdtr=True)
 
             try:
                 self.port_state = gl.mainserial.is_open
