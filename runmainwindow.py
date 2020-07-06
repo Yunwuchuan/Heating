@@ -66,8 +66,8 @@ class Binding(QWidget):
 
         self.ui.lineEdit_SamplePeriod.setText("50")
         self.ui.lineEdit_F_SetPoint.setText("0")
-        self.ui.lineEdit_P_SetPoint.setText("0")
-        self.ui.lineEdit_T_SetPoint.setText("0")
+        self.ui.lineEdit_T0_SetPoint.setText("0")
+        self.ui.lineEdit_T1_SetPoint.setText("0")
         self.ui.lineEdit_T_Kp.setText("0")
         self.ui.lineEdit_T_Ti.setText("0")
         self.ui.lineEdit_T_Td.setText("0")
@@ -86,16 +86,16 @@ class Binding(QWidget):
     def changeMode(self, index):
         if index == 0:
             self.ui.lineEdit_F_SetPoint.setEnabled(True)
-            self.ui.lineEdit_P_SetPoint.setEnabled(False)
-            self.ui.lineEdit_T_SetPoint.setEnabled(True)
+            self.ui.lineEdit_T0_SetPoint.setEnabled(False)
+            self.ui.lineEdit_T1_SetPoint.setEnabled(True)
         elif index == 1:
             self.ui.lineEdit_F_SetPoint.setEnabled(True)
-            self.ui.lineEdit_P_SetPoint.setEnabled(False)
-            self.ui.lineEdit_T_SetPoint.setEnabled(True)
+            self.ui.lineEdit_T0_SetPoint.setEnabled(False)
+            self.ui.lineEdit_T1_SetPoint.setEnabled(True)
         elif index == 2:
             self.ui.lineEdit_F_SetPoint.setEnabled(False)
-            self.ui.lineEdit_P_SetPoint.setEnabled(True)
-            self.ui.lineEdit_T_SetPoint.setEnabled(True)
+            self.ui.lineEdit_T0_SetPoint.setEnabled(True)
+            self.ui.lineEdit_T1_SetPoint.setEnabled(True)
         self.graph.mode = index
 
     def re_serial_port(self, index):
@@ -174,8 +174,8 @@ class Binding(QWidget):
             scanEnable = int(self.ui.scanEnable.isChecked())
             scanPeriod = int(self.ui.lineEdit_Scan_Period.text())
             fSetPoint = int(self.ui.lineEdit_F_SetPoint.text())
-            pSetPoint = int(10*float(self.ui.lineEdit_P_SetPoint.text()))
-            tSetPoint = int(self.ui.lineEdit_T_SetPoint.text())
+            pSetPoint = int(10*float(self.ui.lineEdit_T0_SetPoint.text()))
+            tSetPoint = int(self.ui.lineEdit_T1_SetPoint.text())
             start_flag = int(self.ui.startSample.isChecked())
             ctrl_flag = int(self.ui.ctrlStart.isChecked())
             t_Kp = int(10*float(self.ui.lineEdit_T_Kp.text()))
