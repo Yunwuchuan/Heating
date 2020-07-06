@@ -56,7 +56,7 @@
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;s&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab_Serial">
      <attribute name="title">
@@ -698,7 +698,7 @@
         <rect>
          <x>20</x>
          <y>70</y>
-         <width>141</width>
+         <width>31</width>
          <height>31</height>
         </rect>
        </property>
@@ -734,7 +734,7 @@
         <rect>
          <x>20</x>
          <y>110</y>
-         <width>141</width>
+         <width>31</width>
          <height>31</height>
         </rect>
        </property>
@@ -752,7 +752,7 @@
         <rect>
          <x>20</x>
          <y>30</y>
-         <width>141</width>
+         <width>31</width>
          <height>31</height>
         </rect>
        </property>
@@ -824,7 +824,7 @@
         <rect>
          <x>20</x>
          <y>70</y>
-         <width>141</width>
+         <width>31</width>
          <height>31</height>
         </rect>
        </property>
@@ -860,7 +860,7 @@
         <rect>
          <x>20</x>
          <y>110</y>
-         <width>141</width>
+         <width>31</width>
          <height>31</height>
         </rect>
        </property>
@@ -878,7 +878,7 @@
         <rect>
          <x>20</x>
          <y>30</y>
-         <width>141</width>
+         <width>31</width>
          <height>31</height>
         </rect>
        </property>
@@ -950,7 +950,7 @@
         <rect>
          <x>20</x>
          <y>70</y>
-         <width>141</width>
+         <width>31</width>
          <height>31</height>
         </rect>
        </property>
@@ -986,7 +986,7 @@
         <rect>
          <x>20</x>
          <y>110</y>
-         <width>141</width>
+         <width>31</width>
          <height>31</height>
         </rect>
        </property>
@@ -1004,7 +1004,7 @@
         <rect>
          <x>20</x>
          <y>30</y>
-         <width>141</width>
+         <width>31</width>
          <height>31</height>
         </rect>
        </property>

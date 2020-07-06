@@ -84,18 +84,6 @@ class Binding(QWidget):
         self.textTime.timeout.connect(self.update_panel)
 
     def changeMode(self, index):
-        if index == 0:
-            self.ui.lineEdit_F_SetPoint.setEnabled(True)
-            self.ui.lineEdit_T0_SetPoint.setEnabled(False)
-            self.ui.lineEdit_T1_SetPoint.setEnabled(True)
-        elif index == 1:
-            self.ui.lineEdit_F_SetPoint.setEnabled(True)
-            self.ui.lineEdit_T0_SetPoint.setEnabled(False)
-            self.ui.lineEdit_T1_SetPoint.setEnabled(True)
-        elif index == 2:
-            self.ui.lineEdit_F_SetPoint.setEnabled(False)
-            self.ui.lineEdit_T0_SetPoint.setEnabled(True)
-            self.ui.lineEdit_T1_SetPoint.setEnabled(True)
         self.graph.mode = index
 
     def re_serial_port(self, index):
@@ -174,8 +162,8 @@ class Binding(QWidget):
             scanEnable = int(self.ui.scanEnable.isChecked())
             scanPeriod = int(self.ui.lineEdit_Scan_Period.text())
             fSetPoint = int(self.ui.lineEdit_F_SetPoint.text())
-            pSetPoint = int(10*float(self.ui.lineEdit_T0_SetPoint.text()))
-            tSetPoint = int(self.ui.lineEdit_T1_SetPoint.text())
+            t0SetPoint = int(self.ui.lineEdit_T0_SetPoint.text())
+            t1SetPoint = int(self.ui.lineEdit_T1_SetPoint.text())
             start_flag = int(self.ui.startSample.isChecked())
             ctrl_flag = int(self.ui.ctrlStart.isChecked())
             t_Kp = int(10*float(self.ui.lineEdit_T_Kp.text()))
@@ -187,10 +175,9 @@ class Binding(QWidget):
             p_Kp = int(10*float(self.ui.lineEdit_P_Kp.text()))
             p_Ti = int(10*float(self.ui.lineEdit_P_Ti.text()))
             p_Td = int(100*float(self.ui.lineEdit_P_Td.text()))
-            send_content = "{samplePeriod:02d}{mode:1d}{scanEnable:1d}{scanPeriod:02d}{fSetPoint:05d}{pSetPoint:04d}{tSetPoint:03d}{start_flag:1d}{ctrl_flag:1d}{t_Kp:03d}{t_Ti:03d}{t_Td:03d}{f_Kp:03d}{f_Ti:03d}{f_Td:03d}{p_Kp:03d}{p_Ti:03d}{p_Td:03d}".format(samplePeriod=samplePeriod,
-                mode=mode, scanEnable=scanEnable, fSetPoint=fSetPoint,\
-                pSetPoint=pSetPoint, tSetPoint=tSetPoint, start_flag=start_flag, ctrl_flag=ctrl_flag,\
-                t_Kp=t_Kp, t_Ti=t_Ti, t_Td=t_Td, f_Kp=f_Kp, f_Ti=f_Ti, f_Td=f_Td, p_Kp=p_Kp, p_Ti=p_Ti, p_Td=p_Td, scanPeriod = scanPeriod)
+            send_content = "{samplePeriod:02d}{start_flag:1d}{ctrl_flag:1d}{t0SetPoint:03d}{t1SetPoint:03d}{t_Kp:03d}{t_Ti:03d}{t_Td:03d}".format(samplePeriod=samplePeriod,\
+                 t0SetPoint=t0SetPoint,t1SetPoint=t1SetPoint, start_flag=start_flag, ctrl_flag=ctrl_flag,\
+                t_Kp=t_Kp, t_Ti=t_Ti, t_Td=t_Td)
             print(send_content)
             self.ui.textBrowser_SentText.setText(send_content)
             gl.mainserial.write((send_content+"\r\n").encode())
