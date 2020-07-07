@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import QGridLayout, QWidget, QApplication
 from PyQt5 import QtCore
 from PyQt5 import QtGui
 import bisect
+#import numpy as np
 
 
 class MyQtGraph():
@@ -36,8 +37,11 @@ class MyQtGraph():
             each.setLabel('bottom', "Time", units='s')
             each.getAxis("bottom").tickFont = font
         del(listtemp)
+        self.temp_curve_0 = self.temperaturePlot.plot()
         self.temp_curve_1 = self.temperaturePlot.plot()
-        self.temp_curve_1.setPen((200,200,100))
+        self.temp_curve_2 = self.temperaturePlot.plot()
+        self.temp_curve_3 = self.temperaturePlot.plot()
+
         self.force_curve_1 = self.forcePlot.plot()
         self.pos_curve_1 = self.positionPlot.plot()
         self.versue_curve_1 = self.versus.plot()
@@ -46,11 +50,14 @@ class MyQtGraph():
         self.queue = queue
         self.mode = mode
 
-        self.time_list = []
-        self.temperature_list = []
-        self.force_list = []
-        self.position_list = []
-        self.data = [self.time_list,self.temperature_list,self.force_list,self.position_list]
+        self.time_list = [0]
+        self.temp0Tar_list = [0]
+        self.temp0_list = [0]
+        self.temp1Tar_list = [0]
+        self.temp1_list = [0]
+        self.force_list = [0]
+        self.position_list = [0]
+        self.data = [self.time_list,self.temp0Tar_list, self.temp0_list,self.temp1Tar_list, self.temp1_list]
         self.half_line = ""
 
         self.grid.addWidget(self.temperaturePlot,0,0)
@@ -85,11 +92,11 @@ class MyQtGraph():
                     #print(index)
 
                     pos_y = int(mousePoint.y())  # 鼠标所处的Y轴坐标
-                    if 0 < index < max(self.time_list):
+                    if 0 < index < len(self.time_list):
                         #在label中写入HTML
                         self.templabel.setHtml(
                             "<p style='color:white'><strong>时间：{0}</strong></p><p style='color:white'>温度：{1}</p><p".format(
-                                self.time_list[index], self.temperature_list[index]))
+                                self.time_list[index], self.temp0_list[index]))
 
                 self.templabel.setPos(mousePoint.x(), mousePoint.y())  # 设置label的位置
                 self.tempvLine.setPos(mousePoint.x())
@@ -105,29 +112,38 @@ class MyQtGraph():
             new_text += self.queue.get()  # queue中的新文本读进来
         new_text = self.half_line + new_text  # 跟之前剩下的半行合并
 
-
-        lines = new_text.split("\r\n")[:-1]  # 整个文本分割成行
-        self.half_line = new_text.split("\r\n")[-1]
+        lines = new_text.split("\n")[:-1]  # 整个文本分割成行
+        self.half_line = new_text.split("\n")[-1]
 
 
         for each_line in lines:
             data = each_line.split(",")  # 每行文本用逗号分割
+            data_copy = []
+
             for each in data:
+                if each =='inf' or each == 'nan':
+                    each = 22
                 try:
-                    float(each)
+                    data_copy.append(float(each))
                 except:
-                    break
+                    data_copy.append(0)
+                    continue
+                    #break
             else:
                 try:
-                    self.time_list.append(float(data[0]))
-                    self.temperature_list.append(float(data[1]))
-                    self.force_list.append(float(data[2]))
-                    self.position_list.append(float(data[3]))
+
+                    self.time_list.append(float(data_copy[0]))
+                    self.temp0Tar_list.append(float(data_copy[1]))
+                    self.temp1Tar_list.append(float(data_copy[2]))
+                    self.temp0_list.append(float(data_copy[3]))
+                    self.temp1_list.append(float(data_copy[4]))
+
                     #print(data[0])
                     #print(len(self.time_list),len(self.temperature_list),len(self.force_list),len(self.position_list))
-                except:
+                except Exception as e:
                     self.clear()
                     print("cleared when decode")
+                    print(e)
             continue
     # ===================================
 
@@ -135,15 +151,13 @@ class MyQtGraph():
 
         self.decode()
         try:
-            self.temp_curve_1.setData(self.time_list,self.temperature_list)
-            self.force_curve_1.setData(self.time_list,self.force_list)
-            self.pos_curve_1.setData(self.time_list,self.position_list)
-            if self.mode == 0:
-                self.versue_curve_1.setData(self.force_list,self.position_list)
-            elif self.mode == 1:
-                self.versue_curve_1.setData(self.temperature_list, self.position_list)
-            elif self.mode == 2:
-                self.versue_curve_1.setData(self.temperature_list,self.force_list)
+            self.temp_curve_0.setData(self.time_list,self.temp0Tar_list)
+            self.temp_curve_1.setData(self.time_list, self.temp1Tar_list)
+            self.temp_curve_2.setData(self.time_list, self.temp0_list)
+            self.temp_curve_3.setData(self.time_list, self.temp1_list)
+            print(self.temp0_list)
+
+
         except Exception as e:
             self.clear()
             print("cleared when update")

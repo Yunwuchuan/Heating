@@ -57,6 +57,8 @@ class Binding(QWidget):
         self.ui.startSample.clicked.connect(self.start_clicked)
         self.ui.startSample.setCheckable(True)
 
+        self.ui.t_cali.clicked.connect(self.t_cali_clicked)
+
         self.ui.save.clicked.connect(self.save_data)
         self.ui.clear.clicked.connect(self.clear_clicked)
         self.ui.send.clicked.connect(self.send)
@@ -78,6 +80,7 @@ class Binding(QWidget):
         self.ui.lineEdit_P_Ti.setText("0")
         self.ui.lineEdit_P_Td.setText("0")
         self.ui.lineEdit_Scan_Period.setText("0")
+        self.sys_flag = '0'
 
         self.textTime = QtCore.QTimer()
         self.textTime.setInterval(500)
@@ -175,14 +178,19 @@ class Binding(QWidget):
             p_Kp = int(10*float(self.ui.lineEdit_P_Kp.text()))
             p_Ti = int(10*float(self.ui.lineEdit_P_Ti.text()))
             p_Td = int(100*float(self.ui.lineEdit_P_Td.text()))
-            send_content = "{samplePeriod:02d}{start_flag:1d}{ctrl_flag:1d}{t0SetPoint:03d}{t1SetPoint:03d}{t_Kp:03d}{t_Ti:03d}{t_Td:03d}".format(samplePeriod=samplePeriod,\
+            send_content = "{sys_flag}{start_flag:1d}{ctrl_flag:1d}{samplePeriod:03d}{t0SetPoint:03d}{t1SetPoint:03d}{t_Kp:03d}{t_Ti:03d}{t_Td:03d}".format(samplePeriod=samplePeriod,\
                  t0SetPoint=t0SetPoint,t1SetPoint=t1SetPoint, start_flag=start_flag, ctrl_flag=ctrl_flag,\
-                t_Kp=t_Kp, t_Ti=t_Ti, t_Td=t_Td)
+                t_Kp=t_Kp, t_Ti=t_Ti, t_Td=t_Td,sys_flag = self.sys_flag)
             print(send_content)
             self.ui.textBrowser_SentText.setText(send_content)
             gl.mainserial.write((send_content+"\r\n").encode())
         except:
             self.ui.textBrowser_SentText.setText("send Error")
+
+    def t_cali_clicked(self):
+        self.sys_flag = 'T'
+        self.send()
+        self.sys_flag = '0'
 
 
 
@@ -220,10 +228,9 @@ class Binding(QWidget):
     def update_panel(self):
         new_text = ""
         while not (gl.textQueue.empty()):
-            new_text += gl.textQueue.get()  # queue中的新文本读进来
-
-        self.ui.textBrowser_RecText.moveCursor(QTextCursor.End)
-        self.ui.textBrowser_RecText.insertPlainText(new_text)
+            new_text = gl.textQueue.get()  # queue中的新文本读进来
+            self.ui.textBrowser_RecText.moveCursor(QTextCursor.End)
+            self.ui.textBrowser_RecText.insertPlainText(new_text)
 
 
 
