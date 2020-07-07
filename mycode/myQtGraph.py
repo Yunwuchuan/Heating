@@ -152,18 +152,21 @@ class MyQtGraph():
     def update(self):
 
         self.decode()
+
         try:
-            self.temp_curve_0.setData(self.time_list,self.temp0Tar_list,connect='pairs')
-            self.temp_curve_1.setData(self.time_list, self.temp1Tar_list,connect='pairs')
+            self.temp_curve_0.setData(self.time_list,self.temp0Tar_list)
+            self.temp_curve_1.setData(self.time_list, self.temp1Tar_list)
             self.temp_curve_2.setData(self.time_list, self.temp0_list)
             self.temp_curve_3.setData(self.time_list, self.temp1_list)
-            #print(self.temp0_list)
+            #print(self.time_list)
 
 
         except Exception as e:
             self.clear()
-            print("cleared when update")
+            print("cleared when drawing graph")
             print(e)
+
+
 
     #=========================
 
@@ -172,16 +175,20 @@ class MyQtGraph():
     def start_plot(self):
         self.clear()
         self.time.start()
+
     #=================
     def stop_plot(self):
         self.time.stop()
     #==========
 
     def clear(self):
+        while not (self.queue.empty()):
+            self.queue.get()  # queue中的新文本读进来
         for each in self.data:
             each.clear()
-        #self.half_line = ""
+        self.half_line = ""
         self.update()
+        print(self.time_list)
     #=========================
 #=======================
 
