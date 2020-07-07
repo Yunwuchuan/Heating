@@ -37,10 +37,12 @@ class MyQtGraph():
             each.setLabel('bottom', "Time", units='s')
             each.getAxis("bottom").tickFont = font
         del(listtemp)
-        self.temp_curve_0 = self.temperaturePlot.plot()
+
+        self.temperaturePlot.addLegend()
+        self.temp_curve_0 = self.temperaturePlot.plot(pen=(255,255,0))
         self.temp_curve_1 = self.temperaturePlot.plot()
-        self.temp_curve_2 = self.temperaturePlot.plot()
-        self.temp_curve_3 = self.temperaturePlot.plot()
+        self.temp_curve_2 = self.temperaturePlot.plot(pen=(255,255,0),name='T0')
+        self.temp_curve_3 = self.temperaturePlot.plot(name='T1')
 
         self.force_curve_1 = self.forcePlot.plot()
         self.pos_curve_1 = self.positionPlot.plot()
@@ -95,8 +97,8 @@ class MyQtGraph():
                     if 0 < index < len(self.time_list):
                         #在label中写入HTML
                         self.templabel.setHtml(
-                            "<p style='color:white'><strong>时间：{0}</strong></p><p style='color:white'>温度：{1}</p><p".format(
-                                self.time_list[index], self.temp0_list[index]))
+                            "<p style='color:white'><strong>Time：{0}</strong></p><p style='color:white'>Temp0：{1}</p><p style='color:white'>Temp1：{2}</p>".format(
+                                self.time_list[index], self.temp0_list[index], self.temp1_list[index]))
 
                 self.templabel.setPos(mousePoint.x(), mousePoint.y())  # 设置label的位置
                 self.tempvLine.setPos(mousePoint.x())
@@ -151,11 +153,11 @@ class MyQtGraph():
 
         self.decode()
         try:
-            self.temp_curve_0.setData(self.time_list,self.temp0Tar_list)
-            self.temp_curve_1.setData(self.time_list, self.temp1Tar_list)
+            self.temp_curve_0.setData(self.time_list,self.temp0Tar_list,connect='pairs')
+            self.temp_curve_1.setData(self.time_list, self.temp1Tar_list,connect='pairs')
             self.temp_curve_2.setData(self.time_list, self.temp0_list)
             self.temp_curve_3.setData(self.time_list, self.temp1_list)
-            print(self.temp0_list)
+            #print(self.temp0_list)
 
 
         except Exception as e:
