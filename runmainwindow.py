@@ -58,6 +58,7 @@ class Binding(QWidget):
         self.ui.startSample.setCheckable(True)
 
         self.ui.t_cali.clicked.connect(self.t_cali_clicked)
+        self.ui.f_cali.clicked.connect(self.f_cali_clicked)
 
         self.ui.save.clicked.connect(self.save_data)
         self.ui.clear.clicked.connect(self.clear_clicked)
@@ -192,6 +193,11 @@ class Binding(QWidget):
         self.send()
         self.sys_flag = '0'
 
+    def f_cali_clicked(self):
+        self.sys_flag = 'F'
+        self.send()
+        self.sys_flag = '0'
+
 
 
 
@@ -231,6 +237,11 @@ class Binding(QWidget):
             new_text = gl.textQueue.get()  # queue中的新文本读进来
             self.ui.textBrowser_RecText.moveCursor(QTextCursor.End)
             self.ui.textBrowser_RecText.insertPlainText(new_text)
+            self.ui.temp0_real.setText(str(self.graph.temp0_list[-1]))
+            self.ui.temp1_real.setText(str(self.graph.temp1_list[-1]))
+            self.ui.force_A_real.setText(str(self.graph.force_A_list[-1]))
+            self.ui.force_B_real.setText(str(self.graph.force_B_list[-1]))
+            self.ui.dis_real.setText(str(self.graph.pos0_list[-1]))
 
 
 

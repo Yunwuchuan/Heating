@@ -44,8 +44,15 @@ class MyQtGraph():
         self.temp_curve_2 = self.temperaturePlot.plot(pen=(255,255,0),name='T0')
         self.temp_curve_3 = self.temperaturePlot.plot(name='T1')
 
-        self.force_curve_1 = self.forcePlot.plot()
-        self.pos_curve_1 = self.positionPlot.plot()
+        self.forcePlot.addLegend()
+        self.force_curve_0 = self.forcePlot.plot(pen=(0,255,255), name ='A')
+        self.force_curve_1 = self.forcePlot.plot(pen=(255,255,0),name = 'B')
+
+        self.positionPlot.addLegend()
+        self.pos_curve_0 = self.positionPlot.plot(pen=(255,255,0),name = 'x')
+        self.pos_curve_1 = self.positionPlot.plot(name = 'y')
+        self.pos_curve_2 = self.positionPlot.plot(pen=(0,255,255), name ='z'
+                                                  )
         self.versue_curve_1 = self.versus.plot()
 
         self.flag = 0
@@ -57,9 +64,12 @@ class MyQtGraph():
         self.temp0_list = [0]
         self.temp1Tar_list = [0]
         self.temp1_list = [0]
-        self.force_list = [0]
-        self.position_list = [0]
-        self.data = [self.time_list,self.temp0Tar_list, self.temp0_list,self.temp1Tar_list, self.temp1_list]
+        self.force_A_list = [0]
+        self.force_B_list = [0]
+        self.pos0_list = [0]
+        self.pos1_list = [0]
+        self.pos2_list = [0]
+        self.data = [self.time_list,self.temp0Tar_list, self.temp0_list,self.temp1Tar_list, self.temp1_list,self.pos0_list, self.pos1_list, self.pos2_list, self.force_A_list, self.force_B_list]
         self.half_line = ""
 
         self.grid.addWidget(self.temperaturePlot,0,0)
@@ -77,10 +87,25 @@ class MyQtGraph():
         self.temphLine = pg.InfiniteLine(angle=0, movable=False, )  # 创建一个水平线条
         self.temperaturePlot.addItem(self.tempvLine, ignoreBounds=True)  # 在图形部件中添加垂直线条
         self.temperaturePlot.addItem(self.temphLine, ignoreBounds=True)  # 在图形部件中添加水平线条
+        self.temp_move_slot = pg.SignalProxy(self.temperaturePlot.scene().sigMouseMoved, rateLimit=60, slot=self.temp_mouse_move)
 
-        self.move_slot = pg.SignalProxy(self.temperaturePlot.scene().sigMouseMoved, rateLimit=60, slot=self.mouse_move)
+        self.poslabel = pg.TextItem()
+        self.positionPlot.addItem(self.poslabel,ignoreBounds=True)
+        self.posvLine = pg.InfiniteLine(angle=90, movable=False, )  # 创建一个垂直线条
+        self.poshLine = pg.InfiniteLine(angle=0, movable=False, )  # 创建一个水平线条
+        self.positionPlot.addItem(self.posvLine, ignoreBounds=True)  # 在图形部件中添加垂直线条
+        self.positionPlot.addItem(self.poshLine, ignoreBounds=True)  # 在图形部件中添加水平线条
+        self.pos_move_slot = pg.SignalProxy(self.positionPlot.scene().sigMouseMoved, rateLimit=60, slot=self.pos_mouse_move)
 
-    def mouse_move(self,event = None):
+        self.forcelabel = pg.TextItem()
+        self.forcePlot.addItem(self.forcelabel,ignoreBounds=True)
+        self.forcevLine = pg.InfiniteLine(angle=90, movable=False, )  # 创建一个垂直线条
+        self.forcehLine = pg.InfiniteLine(angle=0, movable=False, )  # 创建一个水平线条
+        self.forcePlot.addItem(self.forcevLine, ignoreBounds=True)  # 在图形部件中添加垂直线条
+        self.forcePlot.addItem(self.forcehLine, ignoreBounds=True)  # 在图形部件中添加水平线条
+        self.force_move_slot = pg.SignalProxy(self.forcePlot.scene().sigMouseMoved, rateLimit=60, slot=self.force_mouse_move)
+
+    def temp_mouse_move(self,event = None):
         if event is None:
             print("事件为空")
         else:
@@ -103,6 +128,61 @@ class MyQtGraph():
                 self.templabel.setPos(mousePoint.x(), mousePoint.y())  # 设置label的位置
                 self.tempvLine.setPos(mousePoint.x())
                 self.temphLine.setPos(mousePoint.y())
+            except Exception as e:
+                #print(e)
+                pass
+                #print(traceback.print_exc())
+
+    def pos_mouse_move(self,event = None):
+        if event is None:
+            print("事件为空")
+        else:
+            mospos = event[0]  # 获取事件的鼠标位置
+            try:
+                # 如果鼠标位置在绘图部件中
+                if self.positionPlot.sceneBoundingRect().contains(mospos):
+                    mousePoint = self.positionPlot.plotItem.vb.mapSceneToView(mospos)  # 转换鼠标坐标
+
+                    index = bisect.bisect(self.time_list,mousePoint.x())  # 鼠标所处的X轴坐标
+                    #print(index)
+
+                    pos_y = int(mousePoint.y())  # 鼠标所处的Y轴坐标
+                    if 0 < index < len(self.time_list):
+                        #在label中写入HTML
+                        self.poslabel.setHtml(
+                            "<p style='color:white'><strong>Time：{0}</strong></p><p style='color:white'>distance：{1}</p>".format(
+                                self.time_list[index], self.pos0_list[index]))
+
+                self.poslabel.setPos(mousePoint.x(), mousePoint.y())  # 设置label的位置
+                self.posvLine.setPos(mousePoint.x())
+                self.poshLine.setPos(mousePoint.y())
+            except Exception as e:
+                #print(e)
+                pass
+                #print(traceback.print_exc())
+    def force_mouse_move(self,event = None):
+        if event is None:
+            print("事件为空")
+        else:
+            mosforce = event[0]  # 获取事件的鼠标位置
+            try:
+                # 如果鼠标位置在绘图部件中
+                if self.forcePlot.sceneBoundingRect().contains(mosforce):
+                    mousePoint = self.forcePlot.plotItem.vb.mapSceneToView(mosforce)  # 转换鼠标坐标
+
+                    index = bisect.bisect(self.time_list,mousePoint.x())  # 鼠标所处的X轴坐标
+                    #print(index)
+
+                    pos_y = int(mousePoint.y())  # 鼠标所处的Y轴坐标
+                    if 0 < index < len(self.time_list):
+                        #在label中写入HTML
+                        self.forcelabel.setHtml(
+                            "<p style='color:white'><strong>Time：{0}</strong></p><p style='color:white'>force_A：{1}</p><p style='color:white'>force_B：{2}</p>".format(
+                                self.time_list[index], self.force_A_list[index], self.force_B_list[index]))
+
+                self.forcelabel.setPos(mousePoint.x(), mousePoint.y())  # 设置label的位置
+                self.forcevLine.setPos(mousePoint.x())
+                self.forcehLine.setPos(mousePoint.y())
             except Exception as e:
                 #print(e)
                 pass
@@ -139,6 +219,9 @@ class MyQtGraph():
                     self.temp1Tar_list.append(float(data_copy[2]))
                     self.temp0_list.append(float(data_copy[3]))
                     self.temp1_list.append(float(data_copy[4]))
+                    self.force_A_list.append(float(data_copy[5]))
+                    self.force_B_list.append(float(data_copy[6]))
+                    self.pos0_list.append(float(data_copy[7]))
 
                     #print(data[0])
                     #print(len(self.time_list),len(self.temperature_list),len(self.force_list),len(self.position_list))
@@ -158,7 +241,12 @@ class MyQtGraph():
             self.temp_curve_1.setData(self.time_list, self.temp1Tar_list)
             self.temp_curve_2.setData(self.time_list, self.temp0_list)
             self.temp_curve_3.setData(self.time_list, self.temp1_list)
-            #print(self.time_list)
+            self.pos_curve_0.setData(self.time_list, self.pos0_list)
+            # self.pos_curve_1.setData(self.time_list, self.pos1_list)
+            # self.pos_curve_2.setData(self.time_list, self.pos2_list)
+            self.force_curve_0.setData(self.time_list, self.force_A_list)
+            self.force_curve_1.setData(self.time_list, self.force_B_list)
+            #print(len(self.time_list),len(self.force_A_list))
 
 
         except Exception as e:
