@@ -132,7 +132,6 @@ class MyQtGraph():
                 #print(e)
                 pass
                 #print(traceback.print_exc())
-
     def pos_mouse_move(self,event = None):
         if event is None:
             print("事件为空")

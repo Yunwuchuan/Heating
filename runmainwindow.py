@@ -22,7 +22,6 @@ class Binding(QWidget):
         super(QWidget, self).__init__()
         self.ui = ui
         self.mainwindow = mainwindow
-        self.count = 0
         self.port_state = 0
 
         #串口选择栏
@@ -54,19 +53,24 @@ class Binding(QWidget):
         self.ui.mode_select.activated.connect(self.changeMode)
         self.changeMode(0)
 
+        #start,ctrl按钮，按钮可选择
         self.ui.startSample.clicked.connect(self.start_clicked)
         self.ui.startSample.setCheckable(True)
+        self.ui.ctrlStart.setCheckable(True)
+        self.ui.ctrlStart.clicked.connect(self.ctrl_clicked)
 
+        #cali 按钮
         self.ui.t_cali.clicked.connect(self.t_cali_clicked)
         self.ui.f_cali.clicked.connect(self.f_cali_clicked)
+        self.sys_flag = '0'
 
+        #clear, send, save 按钮
         self.ui.save.clicked.connect(self.save_data)
         self.ui.clear.clicked.connect(self.clear_clicked)
         self.ui.send.clicked.connect(self.send)
 
-        self.ui.ctrlStart.setCheckable(True)
-        self.ui.ctrlStart.clicked.connect(self.ctrl_clicked)
 
+        #lineEdit赋初值
         self.ui.lineEdit_SamplePeriod.setText("10")
         self.ui.lineEdit_F_SetPoint.setText("0")
         self.ui.lineEdit_T0_SetPoint.setText("0")
@@ -81,15 +85,17 @@ class Binding(QWidget):
         self.ui.lineEdit_P_Ti.setText("0")
         self.ui.lineEdit_P_Td.setText("0")
         self.ui.lineEdit_Scan_Period.setText("0")
-        self.sys_flag = '0'
 
+        #初始化定时器，用来触发面板更新
         self.textTime = QtCore.QTimer()
         self.textTime.setInterval(500)
         self.textTime.timeout.connect(self.update_panel)
 
+    #模式变化
     def changeMode(self, index):
         self.graph.mode = index
 
+    #串口选择下拉菜单被激活
     def re_serial_port(self, index):
 
         def setPortlist():
@@ -107,7 +113,7 @@ class Binding(QWidget):
             setPortlist()
             # newthread = threading.Thread(target= setPortlist)
             # newthread.start()
-
+    #打开串口
     def openSerial(self):
         if self.ui.open_serial.isChecked():
 
@@ -138,6 +144,7 @@ class Binding(QWidget):
                 self.ui.open_serial.setText("打开\n串口")
                 self.ui.open_serial.setChecked(False)
 
+    #采样按钮按下，发送指令，绘图启停
     def start_clicked(self):
         if self.ui.startSample.isChecked():
             print("采样键按下")
@@ -150,15 +157,17 @@ class Binding(QWidget):
             print("采样停止按下")
         self.send()
 
+    #控制按钮按下
     def ctrl_clicked(self):
         self.send()
 
-
+    #clear按下
     def clear_clicked(self):
         self.graph.clear()
         gl.mainserial.clear()
         self.ui.textBrowser_RecText.clear()
 
+    #send按下
     def send(self):
         try:
             samplePeriod = int(self.ui.lineEdit_SamplePeriod.text())
@@ -188,19 +197,19 @@ class Binding(QWidget):
         except:
             self.ui.textBrowser_SentText.setText("send Error")
 
+    #t_cali按下
     def t_cali_clicked(self):
         self.sys_flag = 'T'
         self.send()
         self.sys_flag = '0'
 
+    #f_cali按下
     def f_cali_clicked(self):
         self.sys_flag = 'F'
         self.send()
         self.sys_flag = '0'
 
-
-
-
+    #保存文件
     def save_data(self):
         def saveFile():
             # get_directory_path = QFileDialog.getExistingDirectory(self,
@@ -231,6 +240,7 @@ class Binding(QWidget):
             #     self.filePathlineEdit.setText(str(' '.join(get_filenames_path)))
         saveFile()
 
+    #更新面板数值显示
     def update_panel(self):
         new_text = ""
         while not (gl.textQueue.empty()):
@@ -244,35 +254,6 @@ class Binding(QWidget):
             self.ui.dis_real.setText(str(self.graph.pos0_list[-1]))
 
 
-
-
-    #
-    # def motor_move(self):
-    #     self.time.start()
-    #     if self.port_state:
-    #         sender = self.mainwindow.sender()
-    #         if sender == self.ui.motor_forward:
-    #             dir = "f"
-    #             vol = "{:0>2d}".format(int(self.ui.forward_vol.currentText()[:-1]))
-    #         elif sender == self.ui.motor_backward:
-    #             dir = "b"
-    #             vol = "{:0>2d}".format(int(self.ui.backward_vol.currentText()[:-1]))
-    #
-    #         str2send = dir + vol + "\r\n"
-    #         gl.mainserial.write(str2send.encode("gbk"))
-    #
-    # def motor_stop(self):
-    #     self.time.stop()
-    #     self.count = 0
-    #     if self.port_state:
-    #         gl.mainserial.write("s00\r\n".encode("gbk"))
-    #
-    # def time_refresh(self):
-    #     self.count += 1
-    #     if self.ui.motor_forward.isDown():
-    #         self.ui.forward_time.setText("%.1fs"%(0.1*self.count))
-    #     elif self.ui.motor_backward.isDown():
-    #         self.ui.backward_time.setText("%.1fs" % (0.1 * self.count))
     #
     # def openFile(self):
     #     # get_directory_path = QFileDialog.getExistingDirectory(self,
