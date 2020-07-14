@@ -176,8 +176,8 @@ class Binding(QWidget):
             scanEnable = int(self.ui.scanEnable.isChecked())
             scanPeriod = int(self.ui.lineEdit_Scan_Period.text())
             fSetPoint = int(self.ui.lineEdit_F_SetPoint.text())
-            t0SetPoint = int(self.ui.lineEdit_T0_SetPoint.text())
-            t1SetPoint = int(self.ui.lineEdit_T1_SetPoint.text())
+            tSetPoint = int(self.ui.lineEdit_T_SetPoint.text())
+            pSetPoint = int(self.ui.lineEdit_P_SetPoint.text())
             start_flag = int(self.ui.startSample.isChecked())
             ctrl_flag = int(self.ui.ctrlStart.isChecked())
             t_Kp = int(10*float(self.ui.lineEdit_T_Kp.text()))
@@ -189,9 +189,10 @@ class Binding(QWidget):
             p_Kp = int(10*float(self.ui.lineEdit_P_Kp.text()))
             p_Ti = int(10*float(self.ui.lineEdit_P_Ti.text()))
             p_Td = int(100*float(self.ui.lineEdit_P_Td.text()))
-            send_content = "{sys_flag}{start_flag:1d}{ctrl_flag:1d}{samplePeriod:03d}{t0SetPoint:03d}{t1SetPoint:03d}{t_Kp:03d}{t_Ti:03d}{t_Td:03d}".format(samplePeriod=samplePeriod,\
-                 t0SetPoint=t0SetPoint,t1SetPoint=t1SetPoint, start_flag=start_flag, ctrl_flag=ctrl_flag,\
-                t_Kp=t_Kp, t_Ti=t_Ti, t_Td=t_Td,sys_flag = self.sys_flag)
+            send_content = "{sys_flag}{start_flag:1d}{ctrl_flag:1d}{mode:1d}{scanEnable:1d}{samplePeriod:03d}{scanPeriod:03d}{tSetPoint:03d}{fSetPoint:03d}{pSetPoint:03d}{t_Kp:03d}{t_Ti:03d}{t_Td:03d}{f_Kp:03d}{f_Ti:03d}{f_Td:03d}{p_Kp:03d}{p_Ti:03d}{p_Td:03d}".format(samplePeriod=samplePeriod,\
+                 tSetPoint=tSetPoint,pSetPoint=pSetPoint,fSetPoint=fSetPoint, start_flag=start_flag, ctrl_flag=ctrl_flag,\
+                t_Kp=t_Kp, t_Ti=t_Ti, t_Td=t_Td,sys_flag = self.sys_flag, mode=mode, scanEnable=scanEnable, scanPeriod=scanPeriod,\
+                 f_Kp=f_Kp, f_Ti=f_Ti, f_Td=f_Td, p_Kp=p_Kp, p_Ti=p_Ti, p_Td=p_Td)
             print(send_content)
             self.ui.textBrowser_SentText.setText(send_content)
             gl.mainserial.write((send_content+"\r\n").encode())
@@ -253,9 +254,9 @@ class Binding(QWidget):
             new_text = gl.textQueue.get()  # queue中的新文本读进来
             self.ui.textBrowser_RecText.moveCursor(QTextCursor.End)
             self.ui.textBrowser_RecText.insertPlainText(new_text)
-            self.ui.temp_real.setText(str(self.graph.temp0_list[-1]))
-            self.ui.force_real.setText(str(self.graph.force_A_list[-1]))
-            self.ui.dis_real.setText(str(self.graph.pos0_list[-1]))
+            self.ui.temp_real.setText(str(self.graph.temp_list[-1]))
+            self.ui.force_real.setText(str(self.graph.force_list[-1]))
+            self.ui.dis_real.setText(str(self.graph.pos_list[-1]))
 
 
     #
