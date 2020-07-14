@@ -227,7 +227,7 @@
      <widget class="QLabel" name="label_Temperature">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>10</x>
         <y>240</y>
         <width>141</width>
         <height>31</height>
@@ -240,7 +240,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Temp 1</string>
+       <string>Temperature</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_Force">
@@ -262,7 +262,7 @@
        <string>Force</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_T1_SetPoint">
+     <widget class="QLineEdit" name="lineEdit_T_SetPoint">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -316,10 +316,10 @@
        </font>
       </property>
       <property name="text">
-       <string>Temp 0</string>
+       <string>Position</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_T0_SetPoint">
+     <widget class="QLineEdit" name="lineEdit_P_SetPoint">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -676,7 +676,7 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>550</y>
+        <y>570</y>
         <width>81</width>
         <height>31</height>
        </rect>
@@ -688,14 +688,14 @@
        </font>
       </property>
       <property name="text">
-       <string>Temp 0</string>
+       <string>Temp</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_Force_6">
+     <widget class="QLabel" name="label_Force_2">
       <property name="geometry">
        <rect>
-        <x>150</x>
-        <y>550</y>
+        <x>140</x>
+        <y>570</y>
         <width>81</width>
         <height>31</height>
        </rect>
@@ -707,122 +707,17 @@
        </font>
       </property>
       <property name="text">
-       <string>Temp 1</string>
+       <string>Force</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="temp1_real">
+     <widget class="QLineEdit" name="force_real">
       <property name="enabled">
        <bool>false</bool>
       </property>
       <property name="geometry">
        <rect>
         <x>140</x>
-        <y>580</y>
-        <width>91</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="palette">
-       <palette>
-        <active>
-         <colorrole role="Text">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="PlaceholderText">
-          <brush brushstyle="SolidPattern">
-           <color alpha="128">
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </brush>
-         </colorrole>
-        </active>
-        <inactive>
-         <colorrole role="Text">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="PlaceholderText">
-          <brush brushstyle="SolidPattern">
-           <color alpha="128">
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </brush>
-         </colorrole>
-        </inactive>
-        <disabled>
-         <colorrole role="Text">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="PlaceholderText">
-          <brush brushstyle="SolidPattern">
-           <color alpha="128">
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </brush>
-         </colorrole>
-        </disabled>
-       </palette>
-      </property>
-      <property name="font">
-       <font>
-        <family>Arial</family>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_Force_2">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>610</y>
-        <width>81</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Arial</family>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Force A</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="force_A_real">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>640</y>
+        <y>600</y>
         <width>91</width>
         <height>31</height>
        </rect>
@@ -904,9 +799,9 @@
      <widget class="QPushButton" name="save">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>150</x>
         <y>490</y>
-        <width>261</width>
+        <width>120</width>
         <height>56</height>
        </rect>
       </property>
@@ -938,111 +833,6 @@
        <string>Save</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="force_B_real">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>140</x>
-        <y>640</y>
-        <width>91</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="palette">
-       <palette>
-        <active>
-         <colorrole role="Text">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="PlaceholderText">
-          <brush brushstyle="SolidPattern">
-           <color alpha="128">
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </brush>
-         </colorrole>
-        </active>
-        <inactive>
-         <colorrole role="Text">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="PlaceholderText">
-          <brush brushstyle="SolidPattern">
-           <color alpha="128">
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </brush>
-         </colorrole>
-        </inactive>
-        <disabled>
-         <colorrole role="Text">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="PlaceholderText">
-          <brush brushstyle="SolidPattern">
-           <color alpha="128">
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </brush>
-         </colorrole>
-        </disabled>
-       </palette>
-      </property>
-      <property name="font">
-       <font>
-        <family>Arial</family>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_Force_3">
-      <property name="geometry">
-       <rect>
-        <x>140</x>
-        <y>610</y>
-        <width>81</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Arial</family>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Force B</string>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="dis_real">
       <property name="enabled">
        <bool>false</bool>
@@ -1050,7 +840,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>700</y>
+        <y>680</y>
         <width>91</width>
         <height>31</height>
        </rect>
@@ -1133,7 +923,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>670</y>
+        <y>650</y>
         <width>81</width>
         <height>31</height>
        </rect>
@@ -1148,14 +938,14 @@
        <string>Dis</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="temp0_real">
+     <widget class="QLineEdit" name="temp_real">
       <property name="enabled">
        <bool>false</bool>
       </property>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>580</y>
+        <y>600</y>
         <width>91</width>
         <height>31</height>
        </rect>
@@ -1316,6 +1106,43 @@
       </property>
       <property name="clearButtonEnabled">
        <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="p_cali">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>490</y>
+        <width>120</width>
+        <height>56</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>56</width>
+        <height>56</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>120</width>
+        <height>201</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>P Cal</string>
       </property>
      </widget>
     </widget>

@@ -62,6 +62,7 @@ class Binding(QWidget):
         #cali 按钮
         self.ui.t_cali.clicked.connect(self.t_cali_clicked)
         self.ui.f_cali.clicked.connect(self.f_cali_clicked)
+        self.ui.p_cali.clicked.connect(self.p_cali_clicked)
         self.sys_flag = '0'
 
         #clear, send, save 按钮
@@ -73,8 +74,8 @@ class Binding(QWidget):
         #lineEdit赋初值
         self.ui.lineEdit_SamplePeriod.setText("10")
         self.ui.lineEdit_F_SetPoint.setText("0")
-        self.ui.lineEdit_T0_SetPoint.setText("0")
-        self.ui.lineEdit_T1_SetPoint.setText("0")
+        self.ui.lineEdit_T_SetPoint.setText("0")
+        self.ui.lineEdit_P_SetPoint.setText("0")
         self.ui.lineEdit_T_Kp.setText("1.2")
         self.ui.lineEdit_T_Ti.setText("1")
         self.ui.lineEdit_T_Td.setText("0")
@@ -209,6 +210,11 @@ class Binding(QWidget):
         self.send()
         self.sys_flag = '0'
 
+    def p_cali_clicked(self):
+        self.sys_flag = 'P'
+        self.send()
+        self.sys_flag = '0'
+
     #保存文件
     def save_data(self):
         def saveFile():
@@ -247,10 +253,8 @@ class Binding(QWidget):
             new_text = gl.textQueue.get()  # queue中的新文本读进来
             self.ui.textBrowser_RecText.moveCursor(QTextCursor.End)
             self.ui.textBrowser_RecText.insertPlainText(new_text)
-            self.ui.temp0_real.setText(str(self.graph.temp0_list[-1]))
-            self.ui.temp1_real.setText(str(self.graph.temp1_list[-1]))
-            self.ui.force_A_real.setText(str(self.graph.force_A_list[-1]))
-            self.ui.force_B_real.setText(str(self.graph.force_B_list[-1]))
+            self.ui.temp_real.setText(str(self.graph.temp0_list[-1]))
+            self.ui.force_real.setText(str(self.graph.force_A_list[-1]))
             self.ui.dis_real.setText(str(self.graph.pos0_list[-1]))
 
 

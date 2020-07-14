@@ -39,20 +39,19 @@ class MyQtGraph():
         del(listtemp)
 
         self.temperaturePlot.addLegend()
-        self.temp_curve_0 = self.temperaturePlot.plot(pen=(255,255,0))
-        self.temp_curve_1 = self.temperaturePlot.plot()
-        self.temp_curve_2 = self.temperaturePlot.plot(pen=(255,255,0),name='T0')
-        self.temp_curve_3 = self.temperaturePlot.plot(name='T1')
+        self.temp_curve_0 = self.temperaturePlot.plot()
+        self.temp_curve_1 = self.temperaturePlot.plot(pen=(255,255,0),name='Temperature')
+
 
         self.forcePlot.addLegend()
-        self.force_curve_0 = self.forcePlot.plot(pen=(0,255,255), name ='A')
-        self.force_curve_1 = self.forcePlot.plot(pen=(255,255,0),name = 'B')
+        self.force_curve_0 = self.forcePlot.plot()
+        self.force_curve_1 = self.forcePlot.plot(pen=(255, 255, 0), name='Force')
+
 
         self.positionPlot.addLegend()
-        self.pos_curve_0 = self.positionPlot.plot(pen=(255,255,0),name = 'x')
-        self.pos_curve_1 = self.positionPlot.plot(name = 'y')
-        self.pos_curve_2 = self.positionPlot.plot(pen=(0,255,255), name ='z'
-                                                  )
+        self.pos_curve_0 = self.positionPlot.plot()
+        self.pos_curve_1 = self.positionPlot.plot(pen=(255, 255, 0), name='Position')
+
         self.versue_curve_1 = self.versus.plot()
 
         self.flag = 0
@@ -60,16 +59,14 @@ class MyQtGraph():
         self.mode = mode
 
         self.time_list = [0]
-        self.temp0Tar_list = [0]
-        self.temp0_list = [0]
-        self.temp1Tar_list = [0]
-        self.temp1_list = [0]
-        self.force_A_list = [0]
-        self.force_B_list = [0]
-        self.pos0_list = [0]
-        self.pos1_list = [0]
-        self.pos2_list = [0]
-        self.data = [self.time_list,self.temp0Tar_list, self.temp0_list,self.temp1Tar_list, self.temp1_list,self.pos0_list, self.pos1_list, self.pos2_list, self.force_A_list, self.force_B_list]
+        self.tempTar_list = [0]
+        self.temp_list = [0]
+        self.forceTar_list = [0]
+        self.force_list = [0]
+        self.posTar_list = [0]
+        self.pos_list = [0]
+
+        self.data = [self.time_list,self.tempTar_list, self.temp_list,self.posTar_list, self.pos_list, self.forceTar_list, self.force_list]
         self.half_line = ""
 
         self.grid.addWidget(self.temperaturePlot,0,0)
@@ -122,8 +119,8 @@ class MyQtGraph():
                     if 0 < index < len(self.time_list):
                         #在label中写入HTML
                         self.templabel.setHtml(
-                            "<p style='color:white'><strong>Time：{0}</strong></p><p style='color:white'>Temp0：{1}</p><p style='color:white'>Temp1：{2}</p>".format(
-                                self.time_list[index], self.temp0_list[index], self.temp1_list[index]))
+                            "<p style='color:white'><strong>Time：{0}</strong></p><p style='color:white'>Temp0：{1}</p>".format(
+                                self.time_list[index], self.temp_list[index]))
 
                 self.templabel.setPos(mousePoint.x(), mousePoint.y())  # 设置label的位置
                 self.tempvLine.setPos(mousePoint.x())
@@ -150,7 +147,7 @@ class MyQtGraph():
                         #在label中写入HTML
                         self.poslabel.setHtml(
                             "<p style='color:white'><strong>Time：{0}</strong></p><p style='color:white'>distance：{1}</p>".format(
-                                self.time_list[index], self.pos0_list[index]))
+                                self.time_list[index], self.pos_list[index]))
 
                 self.poslabel.setPos(mousePoint.x(), mousePoint.y())  # 设置label的位置
                 self.posvLine.setPos(mousePoint.x())
@@ -176,8 +173,8 @@ class MyQtGraph():
                     if 0 < index < len(self.time_list):
                         #在label中写入HTML
                         self.forcelabel.setHtml(
-                            "<p style='color:white'><strong>Time：{0}</strong></p><p style='color:white'>force_A：{1}</p><p style='color:white'>force_B：{2}</p>".format(
-                                self.time_list[index], self.force_A_list[index], self.force_B_list[index]))
+                            "<p style='color:white'><strong>Time：{0}</strong></p><p style='color:white'>force_A：{1}</p>".format(
+                                self.time_list[index], self.force_list[index]))
 
                 self.forcelabel.setPos(mousePoint.x(), mousePoint.y())  # 设置label的位置
                 self.forcevLine.setPos(mousePoint.x())
@@ -214,13 +211,12 @@ class MyQtGraph():
                 try:
 
                     self.time_list.append(float(data_copy[0]))
-                    self.temp0Tar_list.append(float(data_copy[1]))
-                    self.temp1Tar_list.append(float(data_copy[2]))
-                    self.temp0_list.append(float(data_copy[3]))
-                    self.temp1_list.append(float(data_copy[4]))
-                    self.force_A_list.append(float(data_copy[5]))
-                    self.force_B_list.append(float(data_copy[6]))
-                    self.pos0_list.append(float(data_copy[7]))
+                    self.tempTar_list.append(float(data_copy[1]))
+                    self.temp_list.append(float(data_copy[2]))
+                    self.forceTar_list.append(float(data_copy[3]))
+                    self.force_list.append(float(data_copy[4]))
+                    self.posTar_list.append(float(data_copy[5]))
+                    self.pos_list.append(float(data_copy[6]))
 
                     #print(data[0])
                     #print(len(self.time_list),len(self.temperature_list),len(self.force_list),len(self.position_list))
@@ -236,15 +232,13 @@ class MyQtGraph():
         self.decode()
 
         try:
-            self.temp_curve_0.setData(self.time_list,self.temp0Tar_list)
-            self.temp_curve_1.setData(self.time_list, self.temp1Tar_list)
-            self.temp_curve_2.setData(self.time_list, self.temp0_list)
-            self.temp_curve_3.setData(self.time_list, self.temp1_list)
-            self.pos_curve_0.setData(self.time_list, self.pos0_list)
-            # self.pos_curve_1.setData(self.time_list, self.pos1_list)
-            # self.pos_curve_2.setData(self.time_list, self.pos2_list)
-            self.force_curve_0.setData(self.time_list, self.force_A_list)
-            self.force_curve_1.setData(self.time_list, self.force_B_list)
+            self.temp_curve_0.setData(self.time_list,self.tempTar_list)
+            self.temp_curve_1.setData(self.time_list, self.temp_list)
+
+            self.pos_curve_1.setData(self.time_list, self.posTar_list)
+            self.pos_curve_2.setData(self.time_list, self.pos_list)
+            self.force_curve_0.setData(self.time_list, self.forceTar_list)
+            self.force_curve_1.setData(self.time_list, self.force_list)
             #print(len(self.time_list),len(self.force_A_list))
 
 
