@@ -53,6 +53,7 @@ class Myserial(serial.Serial):
             
             if self.in_waiting:
                 self.newcontent = self.read(self.in_waiting).decode("gbk")  #读取新内容
+                #print(self.newcontent)
 
                 self.history += self.newcontent                           #将新内容加入历史内容
                 self.queue.put(self.newcontent)                             #新内容加入队列

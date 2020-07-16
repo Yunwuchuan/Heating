@@ -52,7 +52,7 @@ class MyQtGraph():
         self.pos_curve_0 = self.positionPlot.plot()
         self.pos_curve_1 = self.positionPlot.plot(pen=(255, 255, 0), name='Position')
 
-        self.versue_curve_1 = self.versus.plot()
+        self.versue_curve_0 = self.versus.plot()
 
         self.flag = 0
         self.queue = queue
@@ -235,10 +235,15 @@ class MyQtGraph():
             self.temp_curve_0.setData(self.time_list,self.tempTar_list)
             self.temp_curve_1.setData(self.time_list, self.temp_list)
 
-            self.pos_curve_1.setData(self.time_list, self.posTar_list)
-            self.pos_curve_2.setData(self.time_list, self.pos_list)
+            self.pos_curve_0.setData(self.time_list, self.posTar_list)
+            self.pos_curve_1.setData(self.time_list, self.pos_list)
             self.force_curve_0.setData(self.time_list, self.forceTar_list)
             self.force_curve_1.setData(self.time_list, self.force_list)
+
+            if (self.mode == 0):
+                self.versue_curve_0.setData(self.pos_list,self.force_list)
+            elif (self.mode == 1):
+                self.versue_curve_0.setData(self.temp_list, self.pos_list)
             #print(len(self.time_list),len(self.force_A_list))
 
 

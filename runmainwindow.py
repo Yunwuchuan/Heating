@@ -72,20 +72,20 @@ class Binding(QWidget):
 
 
         #lineEdit赋初值
-        self.ui.lineEdit_SamplePeriod.setText("10")
+        self.ui.lineEdit_SamplePeriod.setText("100")
         self.ui.lineEdit_F_SetPoint.setText("0")
         self.ui.lineEdit_T_SetPoint.setText("0")
         self.ui.lineEdit_P_SetPoint.setText("0")
         self.ui.lineEdit_T_Kp.setText("1.2")
         self.ui.lineEdit_T_Ti.setText("1")
         self.ui.lineEdit_T_Td.setText("0")
-        self.ui.lineEdit_F_Kp.setText("0")
-        self.ui.lineEdit_F_Ti.setText("0")
+        self.ui.lineEdit_F_Kp.setText("1.5")
+        self.ui.lineEdit_F_Ti.setText("0.6")
         self.ui.lineEdit_F_Td.setText("0")
         self.ui.lineEdit_P_Kp.setText("0")
         self.ui.lineEdit_P_Ti.setText("0")
         self.ui.lineEdit_P_Td.setText("0")
-        self.ui.lineEdit_Scan_Period.setText("0")
+        self.ui.lineEdit_Scan_Period.setText("100")
 
         #初始化定时器，用来触发面板更新
         self.textTime = QtCore.QTimer()
@@ -175,7 +175,7 @@ class Binding(QWidget):
             mode = int(str(self.ui.mode_select.currentIndex()))
             scanEnable = int(self.ui.scanEnable.isChecked())
             scanPeriod = int(self.ui.lineEdit_Scan_Period.text())
-            fSetPoint = int(self.ui.lineEdit_F_SetPoint.text())
+            fSetPoint = int(int(self.ui.lineEdit_F_SetPoint.text())/10)
             tSetPoint = int(self.ui.lineEdit_T_SetPoint.text())
             pSetPoint = int(self.ui.lineEdit_P_SetPoint.text())
             start_flag = int(self.ui.startSample.isChecked())
@@ -196,6 +196,7 @@ class Binding(QWidget):
             print(send_content)
             self.ui.textBrowser_SentText.setText(send_content)
             gl.mainserial.write((send_content+"\r\n").encode())
+
         except:
             self.ui.textBrowser_SentText.setText("send Error")
 
