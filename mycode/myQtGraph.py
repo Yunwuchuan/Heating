@@ -102,6 +102,11 @@ class MyQtGraph():
         self.forcePlot.addItem(self.forcehLine, ignoreBounds=True)  # 在图形部件中添加水平线条
         self.force_move_slot = pg.SignalProxy(self.forcePlot.scene().sigMouseMoved, rateLimit=60, slot=self.force_mouse_move)
 
+        self.versusvLine = pg.InfiniteLine(angle=90, movable=False, )  # 创建一个垂直线条
+        self.versushLine = pg.InfiniteLine(angle=0, movable=False, )  # 创建一个水平线条
+        self.versus.addItem(self.versusvLine, ignoreBounds=True)  # 在图形部件中添加垂直线条
+        self.versus.addItem(self.versushLine, ignoreBounds=True)  # 在图形部件中添加水平线条
+
     def temp_mouse_move(self,event = None):
         if event is None:
             print("事件为空")
@@ -209,20 +214,19 @@ class MyQtGraph():
                     #break
             else:
                 try:
-
+                    self.pos_list.append(float(data_copy[6]))
                     self.time_list.append(float(data_copy[0]))
                     self.tempTar_list.append(float(data_copy[1]))
                     self.temp_list.append(float(data_copy[2]))
                     self.forceTar_list.append(float(data_copy[3]))
                     self.force_list.append(float(data_copy[4]))
                     self.posTar_list.append(float(data_copy[5]))
-                    self.pos_list.append(float(data_copy[6]))
 
                     #print(data[0])
                     #print(len(self.time_list),len(self.temperature_list),len(self.force_list),len(self.position_list))
                 except Exception as e:
-                    self.clear()
-                    print("cleared when decode")
+                    #self.clear()
+                    #print("cleared when decode")
                     print(e)
             continue
     # ===================================
@@ -235,19 +239,25 @@ class MyQtGraph():
             self.temp_curve_0.setData(self.time_list,self.tempTar_list)
             self.temp_curve_1.setData(self.time_list, self.temp_list)
 
-            self.pos_curve_0.setData(self.time_list, self.posTar_list)
+            #self.pos_curve_0.setData(self.time_list, self.posTar_list)
             self.pos_curve_1.setData(self.time_list, self.pos_list)
             self.force_curve_0.setData(self.time_list, self.forceTar_list)
             self.force_curve_1.setData(self.time_list, self.force_list)
 
-            if (self.mode == 0):
-                self.versue_curve_0.setData(self.pos_list,self.force_list)
-            elif (self.mode == 1):
-                self.versue_curve_0.setData(self.temp_list, self.pos_list)
-            #print(len(self.time_list),len(self.force_A_list))
+            if (len(self.time_list)):
+                if (self.mode == 0):
+                    self.versue_curve_0.setData(self.pos_list,self.force_list)
+                    self.versusvLine.setPos(self.pos_list[-1])
+                    self.versushLine.setPos(self.force_list[-1])
+                elif (self.mode == 1):
+                    self.versue_curve_0.setData(self.temp_list, self.pos_list)
+                    self.versusvLine.setPos(self.temp_list[-1])
+                    self.versushLine.setPos(self.pos_list[-1])
+                #print(len(self.time_list),len(self.force_A_list))
 
 
         except Exception as e:
+            print(e)
             self.clear()
             print("cleared when drawing graph")
             print(e)
